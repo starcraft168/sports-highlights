@@ -1,0 +1,21 @@
+<div class = 'container' ng-controller="PostCtrl">
+  	<div class='PostContent' ng-repeat = 'x in post'>
+  		<h3 style='margin-left: 20px'>Post Title: {{x.title}} </h3>
+  		<h3 style='margin-left: 20px'><a href=""></a>Post Link: {{x.link}}</a></h3>
+  		<p style='margin-left: 20px'>Post Content: {{x.description}}</p>
+  	</div>
+ </div>
+  
+ <div class="comments" ng-controller='CommentCtrl' >
+	<h3 style='text-align: center'>Comments</h3>
+	  <div class = 'commentBox' >
+	  	<form>
+	  		<input type='text' ng-model= 'newComment.text'>
+	  		<input type='submit' ng-click='addComment()'>
+	  	</form>
+	  	<div ng-repeat = 'comment in comments'>
+	  		<p ng-bind = 'comment.text'></p>
+	  		<p ng-bind = 'comment._owner' ></p>
+	  	</div>
+	  </div>
+  </div>
