@@ -23,7 +23,8 @@
 		        .then(function (data) {
 		          console.log(data)
 		          $scope.userInformation = data;
-		          $location.path('/posts');
+		          console.log('going home')
+		          $location.path('/home');
 		          $scope.disabled = false;
 		          console.log(AuthFactory.isLoggedIn());
 		          $scope.user = {};
