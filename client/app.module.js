@@ -29,7 +29,7 @@
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         .state('Register', {
             // we'll get to this in a bit   
-            url: '/home',
+            url: '/register',
             templateUrl: '/views/Register.html'    
         });
         
