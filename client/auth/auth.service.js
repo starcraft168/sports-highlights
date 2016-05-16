@@ -17,6 +17,7 @@
 	      login: login,
 	      logout: logout,
 	      register: register,
+	      sendUserInfo: senduserInfo,
 	      getUserInfo: getUserInfo
 	    });
 
@@ -29,6 +30,10 @@
 	        } else {
 	          return false;
 	        }
+	    }
+
+	    function sendUserInfo() {
+	    	return userinfo
 	    }
 
 	    function getUserStatus() {
@@ -99,7 +104,7 @@
 	        .success(function (data, status) {
 	          if(status === 200 && data.status){
 	            user = true;
-	            loginInfo = data;
+	            userinfo = data;
 	            deferred.resolve(data);
 	          } else {
 	            user = false;
