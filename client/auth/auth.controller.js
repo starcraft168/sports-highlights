@@ -44,7 +44,7 @@
 				.then(function() {
 					console.log('successfully logged in user');
 					vm.disabled = false;
-					$location.path('/posts');
+					$location.path('/home');
 				})
 				.catch(function() {
 					console.log('error adding username in the controller :/')
