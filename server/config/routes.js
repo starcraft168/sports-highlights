@@ -11,13 +11,25 @@ var express = require('express'),
   }),
   users = require('../Controllers/users.js')
   posts = require('../Controllers/posts.js'),
-  authentications = require('../Controllers/authentications.js'),
-  profiles = require('../Controllers/profiles.js'),
   // comments = require('../controllers/comments.js'),
   User = require('../Models/User.js'),
-  Post = require('../Models/Post.js')
+  Post = require('../Models/Post.js');
 
+routes.post('/register', function(req, res) {
+  users.register(req, res);
+});
 
+routes.post('/login', function(req, res) {
+  users.login(req, res)
+});
+
+routes.post('/isLoggedIn', function(req, res) {
+  users.isLoggedIn(req, res);
+})
+
+routes.get('/logout', function(req, res){
+  users.logout(req, res);
+})
 
 //Testing Client makes API call to backend
 routes.get('/testData'), function(req, res){

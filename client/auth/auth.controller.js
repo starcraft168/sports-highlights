@@ -1,28 +1,10 @@
 (function() {
 	'use strict';
-	angular
-		.module('myApp')
-		.factory('AuthFactory', AuthFactory)
+	 angular
+	  .module('myApp')
+	  .controller('RegisterCtrl', AuthCtrlFunction)
 
-	function AuthFactory($q, $timeout, $http){
-	  var factory = {};
-	  var user = null;
-	  var userinfo;
-	  var loginInfo;
-	  var testData = 'YOU WORKING YET????!'
-
-	    return ({
-	      isLoggedIn: isLoggedIn,
-	      getUserStatus: getUserStatus,
-	      login: login,
-	      logout: logout,
-	      register: register,
-	      sendUserInfo: senduserInfo,
-	      getUserInfo: getUserInfo
-	    });
-
-
-		function AuthControllerFunction(AuthFactory, $location) {
+		function AuthCtrlFunction(AuthFactory, $location) {
 			var vm = this;
 
 			vm.register = register;
@@ -69,10 +51,4 @@
 		}
 
 
-//////////////
-	 
-
-	
-
-	}
 })();
