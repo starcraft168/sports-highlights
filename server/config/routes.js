@@ -10,10 +10,8 @@ var express = require('express'),
     userProperty: 'payload'
   }),
   users = require('../Controllers/users.js')
-  posts = require('../Controllers/posts.js'),
+  posts = require('../Controllers/posts.js')
   // comments = require('../controllers/comments.js'),
-  User = require('../Models/User.js'),
-  Post = require('../Models/Post.js');
 
 routes.post('/register', function(req, res) {
   users.register(req, res);

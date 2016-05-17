@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
 	passport = require('passport')
-	User = mongoose.model('User'),
+	User = require('../models/User.js')
 	users = {}
 
 var sendJSONresponse = function(res, status, content) {
@@ -65,8 +65,7 @@ users.login = function(req, res) {
       return;
     }
 
-
-    console.log('skipped the error part')
+    console.log('found user')
     // If a user is found
     if(user){
       token = user.generateJwt();
@@ -75,6 +74,7 @@ users.login = function(req, res) {
         "token" : token
       });
     } else {
+      console.log('not found')
       // If user is not found
       res.status(401).json(info);
     }

@@ -1,12 +1,12 @@
 (function() {
-	'use strict'
+	console.log();
 	angular
 		.module('myApp')
 		.directive('shNavbar', shNavbarFunction)
 
 		function shNavbarFunction() {
 			return {
-				templateUrl: 'app/layout/nav2.html',
+				templateUrl: '/navbar/navbar.html',
 				restrict: 'EA',
 				scope: {},
 				controller: NavBarControllerFunction,
@@ -16,11 +16,12 @@
 
 		NavBarControllerFunction.$inject = ['$location', 'AuthFactory'];
 
-		function shNavbarFunction($location, AuthFactory) {
+		function NavBarControllerFunction($location, AuthFactory) {
 			var vm = this;
-			var user = AuthFactory.getUsername();
+			vm.user = AuthFactory.getUsername();
 			vm.logout = logout;
 			vm.userName = AuthFactory.getUsername;
+			vm.test = 'yooy'
 
 			vm.isLoggedIn = AuthFactory.isLoggedIn;
 			vm.currentUser = 'hello';

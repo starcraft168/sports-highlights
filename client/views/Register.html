@@ -5,17 +5,17 @@
 </style>
 
 
-<div ng-controller='RegisterCtrl'>
+<div ng-controller='AuthCtrl'>
 	<form class='login_form'>
 	<h2 class = 'logintitle'> Register </h2>
 	  <div class="form-group">
 	    <label>Username</label>
-	    <input type="text" ng-model = "vm.userInfo.username" class="form-control" id="exampleInputEmail1" placeholder="Email">
+	    <input type="text" ng-model = "userInfo.username" class="form-control" id="exampleInputEmail1" placeholder="Email">
 	  </div>
 	  <div class="form-group">
 	    <label for="exampleInputPassword1">Password</label>
-	    <input type="password" ng-model = "vm.userInfo.password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+	    <input type="password" ng-model = "userInfo.password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 	  </div>
-	  <button type="submit" ng-click="vm.register()" class="btn btn-default">Submit</button>
+	  <button type="submit" ng-click="register()" class="btn btn-default">Submit</button>
 	</form>
 </div>

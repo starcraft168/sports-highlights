@@ -2,26 +2,33 @@
 	'use strict';
 	 angular
 	  .module('myApp')
-	  .controller('RegisterCtrl', AuthCtrlFunction)
+	  .controller('AuthCtrl', AuthCtrlFunction)
 
-		function AuthCtrlFunction(AuthFactory, $location) {
+		AuthCtrlFunction.$inject = ["AuthFactory", '$location', '$scope'];
+
+		function AuthCtrlFunction(AuthFactory, $location, $scope) {
 			var vm = this;
+			$scope.hello = 'yo'
+			$scope.login = login
+			$scope.register = register
 
-			vm.register = register;
-			vm.login = login;
-
-			vm.userInfo = {
+			$scope.userInfo = {
 				username: "",
 				password: ""
 			}
 
+
+
+		
+
 			function register() {
 				console.log('registering user')
-				AuthFactory.register(vm.userInfo)
+				console.log($scope.userInfo)
+				AuthFactory.register($scope.userInfo)
 				.then(function() {
 					console.log('successfully added username to database and im in the contorller');
 					vm.disabled = false;
-					$location.path('/posts');
+					$location.path('/home');
 				})
 				.catch(function() {
 					console.log('error adding username in the controller :/')
@@ -30,8 +37,10 @@
 			}
 
 			function login() {
+		    	console.log('above is the info')
+
 				console.log('loggin in user')
-				AuthFactory.login(vm.userInfo)
+				AuthFactory.login($scope.userInfo)
 				.then(function() {
 					console.log('successfully logged in user');
 					vm.disabled = false;

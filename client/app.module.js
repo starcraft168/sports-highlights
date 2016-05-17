@@ -30,7 +30,8 @@
         .state('Register', {
             // we'll get to this in a bit   
             url: '/register',
-            templateUrl: '/views/Register.html'    
+            templateUrl: '/views/Register.html',
+            controller: 'AuthCtrl'    
         });
         
   });

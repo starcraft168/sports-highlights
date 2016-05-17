@@ -1,6 +1,3 @@
-
-
-
 var mongoose = require('mongoose'),
 	crypto = require('crypto'),
 	jwt = require('jsonwebtoken'),
@@ -40,7 +37,6 @@ User.methods.generateJwt = function() {
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
-mongoose.model('User', User);
+module.exports = mongoose.model('User', User);
 
 
-module.exports = mongoose.model('User', User)

@@ -2,16 +2,11 @@
 	'use strict';
 	angular
 		.module('myApp')
-		.factory('AuthFactory', AuthFactory)
+		.factory('AuthFactory', AuthFactoryFunction)
 
-	function AuthFactory($q, $timeout, $http){
-	  var factory = {};
-	  var user = null;
-	  var userinfo;
-	  var loginInfo;
-	  var testData = 'YOU WORKING YET????!'
 
-	    return ({
+		function AuthFactoryFunction($http, $q, $window) {
+			var service = {
 				currentUser: currentUser,
 				saveToken: saveToken,
 				getToken: getToken,
@@ -21,20 +16,9 @@
 				isLoggedIn: isLoggedIn,
 				getProfile: getProfile,
 				getUsername: getUsername
-			
-	    });
-
-
-		function AuthControllerFunction(AuthFactory, $location) {
-			var vm = this;
-
-			vm.register = register;
-			vm.login = login;
-
-			vm.userInfo = {
-				username: "",
-				password: ""
 			}
+
+			return service;	
 
 			function saveToken(token) {
 				$window.localStorage['mean-token'] = token;
@@ -60,7 +44,7 @@
 				
 			}
 
-		    var currentUser = function() {
+		    function currentUser() {
 		      if(isLoggedIn()){
 		        var token = getToken();
 		        var payload = token.split('.')[1];
@@ -105,6 +89,7 @@
 		    }
 
 		    function login(info) {
+		    	console.log(info)
 		    	var deferred = $q.defer();
 		    	$http.post('/login', info)
 		    	.success(function(data){
@@ -127,8 +112,9 @@
 		    		}
 		    	})
 		    };
+	  	  	
 
-//////////////
+
 	 
 
 	
