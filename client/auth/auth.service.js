@@ -12,13 +12,16 @@
 	  var testData = 'YOU WORKING YET????!'
 
 	    return ({
-	      isLoggedIn: isLoggedIn,
-	      getUserStatus: getUserStatus,
-	      login: login,
-	      logout: logout,
-	      register: register,
-	      sendUserInfo: senduserInfo,
-	      getUserInfo: getUserInfo
+				currentUser: currentUser,
+				saveToken: saveToken,
+				getToken: getToken,
+				register: register,
+				login: login,
+				logout: logout,
+				isLoggedIn: isLoggedIn,
+				getProfile: getProfile,
+				getUsername: getUsername
+			
 	    });
 
 
@@ -33,41 +36,97 @@
 				password: ""
 			}
 
-			function register() {
-				console.log('registering user')
-				AuthFactory.register(vm.userInfo)
-				.then(function() {
-					console.log('successfully added username to database and im in the contorller');
-					vm.disabled = false;
-					$location.path('/posts');
-				})
-				.catch(function() {
-					console.log('error adding username in the controller :/')
-				})
-				vm.newUser = {};
+			function saveToken(token) {
+				$window.localStorage['mean-token'] = token;
 			}
 
-			function login() {
-				console.log('loggin in user')
-				AuthFactory.login(vm.userInfo)
-				.then(function() {
-					console.log('successfully logged in user');
-					vm.disabled = false;
-					$location.path('/posts');
-				})
-				.catch(function() {
-					console.log('error adding username in the controller :/')
-				})
-				vm.newUser = {}
+
+			function getToken() {
+				return $window.localStorage['mean-token'];
+
 			}
 
-			// function logout(){
-			// 	console.log('logging out');
-			// 	AuthFactory.logout();
-			// 	$location.path('/register')
-			// }
-		}
+			function isLoggedIn() {
+				var token = getToken();
+				var payload;
+				if(token) {
+					payload = token.split('.')[1];
+					payload = $window.atob(payload);
+					payload = JSON.parse(payload);
+					return payload.exp > Date.now() / 1000;
+				} else {
+					return false;
+				}
+				
+			}
 
+		    var currentUser = function() {
+		      if(isLoggedIn()){
+		        var token = getToken();
+		        var payload = token.split('.')[1];
+		        payload = $window.atob(payload);
+		        payload = JSON.parse(payload);
+		        console.log('line 56!!!!!!!!!!!!!!')
+		        console.log(payload.username)
+		        return {
+		          username : payload.username
+		        };
+		      }
+		    };
+
+		    function getUsername() {
+		      if(isLoggedIn()){
+		        var token = getToken();
+		        var payload = token.split('.')[1];
+		        payload = $window.atob(payload);
+		        payload = JSON.parse(payload);
+		        console.log(payload.username)
+
+		        return {
+		          username : payload.username
+		        };
+		      }
+		    };
+
+	
+
+		    function register(info) {
+		    	var deferred = $q.defer();
+		    	$http.post('/register', info)
+		    	.success(function(data){
+		    		console.log(data.token)
+		    		deferred.resolve(saveToken(data.token))
+		    	})
+		    	.error(function(){
+		    		console.log('in the service and error saving token')
+		    	})
+		    	return deferred.promise;
+
+		    }
+
+		    function login(info) {
+		    	var deferred = $q.defer();
+		    	$http.post('/login', info)
+		    	.success(function(data){
+		    		deferred.resolve(saveToken(data.token))
+		    	})
+		    	.error(function(){
+		    		console.log('in the service and error logging ing')
+		    	})
+		    	return deferred.promise;
+		    }
+
+		    function logout() {
+     			 $window.localStorage.removeItem('mean-token');
+		    }
+
+		    var getProfile = function() {
+		    	return $http.get('/api/profile', {
+		    		headers: {
+		    			Authorization: 'Bearer ' + getToken()
+		    		}
+		    	})
+		    };
 
 //////////////
 	 
