@@ -14,6 +14,7 @@ var User = require('./server/models/User.js')
 require('./server/config/mongoose.js');
 
 var routes = require('./server/config/routes.js')
+require('./server/Config/passport.js');
 
 
 //invoke express, require mongoose.js, require routes
