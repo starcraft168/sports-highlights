@@ -52,7 +52,6 @@
 
 			}
 
-
 	}
 	function bootstrap() {
 		angular

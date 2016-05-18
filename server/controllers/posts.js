@@ -11,6 +11,7 @@ posts.create = function(request, response) {
 		} else {
 			console.log('success')
 			console.log(data)
+			response.json(data)
 		}
 	})
 }
